@@ -15,7 +15,7 @@ import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
 import java.nio.file.NotDirectoryException;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,7 +24,7 @@ public class FileLoader implements SlimeLoader {
 
     private static final FilenameFilter WORLD_FILE_FILTER = (dir, name) -> name.endsWith(".slime");
 
-    private final Map<String, RandomAccessFile> worldFiles = new HashMap<>();
+    private final Map<String, RandomAccessFile> worldFiles = new ConcurrentHashMap<>();
     private final File worldDir;
 
     public FileLoader(File worldDir) {
